@@ -1,19 +1,22 @@
 import sys
 import pygame
 
+from settings import Settings
+
 def run_game():
-    #Inicializa jogo e cria um objeto na tela
+    #Inicializa o pygame, as configurações e o objeto screen
     pygame.init()
-    screen = pygame.display.set_mode((1200,800))
-    pygame.display.set_caption("Faustão Invader")
+    fi_settings = Settings()
+
+    #Obtendo confs da tela
+    screen = pygame.display.set_mode((fi_settings.screen_width,fi_settings.screen_height))
+
+    #Definindo titulo da janela
+    pygame.display.set_caption(fi_settings.titulo_jogo)
 
     #Definindo icone da janela
-    faustaoIcon = pygame.image.load('images/faustao_icon.png')
-    pygame.display.set_icon(faustaoIcon)
-
-    #Definindo cor de fundo
-    bg_color = (230,230,230)
-
+    faustao_icon = pygame.image.load(fi_settings.icone_jogo)
+    pygame.display.set_icon(faustao_icon)
 
     #Inicia laço principal do jogo
     while True:
@@ -24,7 +27,7 @@ def run_game():
                 sys.exit()
 
         #Redesenha a tela a cada passagem pelo laço
-        screen.fill(bg_color)
+        screen.fill(fi_settings.bg_color)
 
         #Deixa a tela mais recente visível
         pygame.display.flip()
