@@ -7,6 +7,10 @@ def run_game():
     screen = pygame.display.set_mode((1200,800))
     pygame.display.set_caption("Faustão Invader")
 
+    #Definindo icone da janela
+    faustaoIcon = pygame.image.load('images/faustao_icon.png')
+    pygame.display.set_icon(faustaoIcon)
+
     #Definindo cor de fundo
     bg_color = (230,230,230)
 
