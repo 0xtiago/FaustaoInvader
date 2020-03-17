@@ -1,7 +1,7 @@
 import sys
 import pygame
-
 from settings import Settings
+from ship import Ship
 
 def run_game():
     #Inicializa o pygame, as configurações e o objeto screen
@@ -18,6 +18,9 @@ def run_game():
     faustao_icon = pygame.image.load(fi_settings.icone_jogo)
     pygame.display.set_icon(faustao_icon)
 
+    #Cria a espaçonave
+    ship = Ship(screen)
+
     #Inicia laço principal do jogo
     while True:
 
@@ -28,6 +31,7 @@ def run_game():
 
         #Redesenha a tela a cada passagem pelo laço
         screen.fill(fi_settings.bg_color)
+        ship.blitme()
 
         #Deixa a tela mais recente visível
         pygame.display.flip()
