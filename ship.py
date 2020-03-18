@@ -5,8 +5,10 @@ class Ship():
         '''Inicializa a nave e define sua posição incial'''
         self.screen = screen
 
-        #Carrega a imagem da nave e obtem seu rect
-        self.image = pygame.image.load('images/ship.bmp')
+        #Carrega a imagem da nave e converte no tamanho adequado.
+        self.image = pygame.image.load('images/ship4.png')
+        self.image = pygame.transform.scale(self.image,(60,48))
+
         # Obtem atributos da imagem como se fosse um retangulo (rect). O que torna mais simples
         self.rect = self.image.get_rect()
 

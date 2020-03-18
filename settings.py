@@ -21,4 +21,5 @@ class Settings():
         self.screen_height = 800
 
         ##Configuração da cor de fundo da janela
-        self.bg_color = (230,230,230)
+        self.bg_color = (153,204,255) #Alterando cor de fundo.
+        #self.bg_color = (230,230,230)
