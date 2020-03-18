@@ -26,7 +26,7 @@ def run_game():
     while True:
 
         #Responde aos eventos de pressionamento de teclas e de mouse
-        gf.check_events()
+        gf.check_events(ship)
         #Atualiza as imagens na tela e alterna para a nova tela
         gf.update_screen(fi_settings, screen, ship)
 

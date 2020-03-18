@@ -1,11 +1,16 @@
 import sys
 import pygame
 
-def check_events():
+def check_events(ship):
     '''Responde aos eventos de pressionamento de teclas e de mouse'''
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
+
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_RIGHT:
+                #Move a nave para a direita
+                ship.rect.centerx += 1
 
 def update_screen(fi_settings,screen,ship):
     '''Atualiza as imagens na tela e alterna para a nova tela'''
