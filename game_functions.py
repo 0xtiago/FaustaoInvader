@@ -7,10 +7,24 @@ def check_events(ship):
         if event.type == pygame.QUIT:
             sys.exit()
 
+        #Movimentando nave quando KEYDOWN, ou seja, pressionado.
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RIGHT:
                 #Move a nave para a direita
-                ship.rect.centerx += 1
+                #ship.rect.centerx += 1
+                ship.moving_right = True
+            elif event.key == pygame.K_LEFT:
+                #Move a nave para a direita
+                #ship.rect.centerx += 1
+                ship.moving_left = True
+
+        #Parando nave quando a tecla não estiver mais pressionada.
+        elif event.type == pygame.KEYUP:
+            if event.key == pygame.K_RIGHT:
+                ship.moving_right = False
+            elif event.key == pygame.K_LEFT:
+                ship.moving_left = False
+
 
 def update_screen(fi_settings,screen,ship):
     '''Atualiza as imagens na tela e alterna para a nova tela'''

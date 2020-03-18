@@ -17,8 +17,8 @@ class Settings():
         #CONFIGURAÇÕES DA TELA
         ################################################################################
         ##Configuração das dimensões da janela em pixels
-        self.screen_width = 1200
-        self.screen_height = 800
+        self.screen_width = 800
+        self.screen_height = 600
 
         ##Configuração da cor de fundo da janela
         self.bg_color = (153,204,255) #Alterando cor de fundo.
