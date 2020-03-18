@@ -20,7 +20,7 @@ def run_game():
     pygame.display.set_icon(faustao_icon)
 
     #Cria a espaçonave
-    ship = Ship(screen)
+    ship = Ship(fi_settings,screen)
 
     #Inicia laço principal do jogo
     while True:

@@ -1,9 +1,10 @@
 import pygame
 
 class Ship():
-    def __init__(self,screen):
+    def __init__(self,fi_settings, screen):
         '''Inicializa a nave e define sua posição incial'''
         self.screen = screen
+        self.fi_settings = fi_settings
 
         #Carrega a imagem da nave e converte no tamanho adequado.
         self.image = pygame.image.load('images/ship4.png')
@@ -22,6 +23,9 @@ class Ship():
         ##Configura a posição do retantulo com a parte mais inferior da tela
         self.rect.bottom = self.screen_rect.bottom
 
+        ##Armazena um valor decimal para o centro da espaçonavw
+        self.center = float(self.rect.centerx)
+
         #Flag de movimento
         self.moving_right = False
         self.moving_left = False
@@ -29,9 +33,12 @@ class Ship():
     def update(self):
         '''Atualiza a posição da espaçonave de acrodo com a flag de movimento'''
         if self.moving_right:
-            self.rect.centerx +=1
+            self.center += self.fi_settings.ship_speed_factor
         if self.moving_left:
-            self.rect.centerx -=1
+            self.center -= self.fi_settings.ship_speed_factor
+
+        #Atualiza o objeto rect de acordo com self.center
+        self.rect.centerx = self.center
 
     def blitme(self):
         '''Desenha a espaçonave em sua posição atual'''

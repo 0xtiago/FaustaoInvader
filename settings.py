@@ -23,3 +23,8 @@ class Settings():
         ##Configuração da cor de fundo da janela
         self.bg_color = (153,204,255) #Alterando cor de fundo.
         #self.bg_color = (230,230,230)
+
+
+        #CONFIGURAÇÕES DA ESPAÇONAVE
+        ################################################################################
+        self.ship_speed_factor = 1.5
