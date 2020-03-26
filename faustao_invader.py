@@ -34,6 +34,6 @@ def run_game():
         ship.update()
         bullets.update()
         #Atualiza as imagens na tela e alterna para a nova tela
-        gf.update_screen(fi_settings, screen, ship, )
+        gf.update_screen(fi_settings, screen, ship, bullets)
 
 run_game()
