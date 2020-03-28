@@ -8,7 +8,7 @@ class Bullet(Sprite):
     def __init__(self, fi_settings, screen, ship):
         '''Cria um objeto para o projetil na posição atual da nave'''
         super(Bullet, self).__init__()
-        super.screen = screen
+        self.screen = screen
 
         # Cria um retangulo para o projetil em (0,0) e , em seguida, define a posição correta
         self.rect = pygame.Rect(0, 0, fi_settings.bullet_width, fi_settings.bullet_height)
