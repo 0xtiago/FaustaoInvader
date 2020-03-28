@@ -10,6 +10,8 @@ def check_keydown_events(event, fi_settings, screen, ship, bullets):
         ship.moving_left = True
     elif event.key == pygame.K_SPACE:
         fire_bullet(fi_settings,screen,ship,bullets)
+    elif event.key == pygame.K_q:
+        sys.exit()
 
 def fire_bullet(fi_settings, screen, ship, bullets):
     '''Dispara um projetil se o limite ainda nao foi alcançado'''

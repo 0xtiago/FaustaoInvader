@@ -2,6 +2,7 @@ import sys
 import pygame
 from settings import Settings
 from ship import Ship
+from faustao import Alien
 import game_functions as gf
 from pygame.sprite import Group
 
@@ -26,6 +27,9 @@ def run_game():
     #Cria um grupo onde serão armazenados os projeteis
     bullets = Group()
 
+    #Cria um Faustão
+    alien = Alien(fi_settings,screen)
+
     #Inicia laço principal do jogo
     while True:
 
@@ -34,6 +38,7 @@ def run_game():
         ship.update()
         gf.update_bullets(bullets)
         #Atualiza as imagens na tela e alterna para a nova tela
-        gf.update_screen(fi_settings, screen, ship, bullets)
+        gf.update_screen(fi_settings, screen, ship, alien, bullets)
+
 
 run_game()
