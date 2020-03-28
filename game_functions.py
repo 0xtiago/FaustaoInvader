@@ -9,10 +9,14 @@ def check_keydown_events(event, fi_settings, screen, ship, bullets):
     elif event.key == pygame.K_LEFT:
         ship.moving_left = True
     elif event.key == pygame.K_SPACE:
-        #Cria um novo projétil e o adiciona ao grupo de projeteis
-        if len(bullets) < fi_settings.bullets_allowed:
-            new_bullet = Bullet(fi_settings, screen, ship)
-            bullets.add(new_bullet)
+        fire_bullet(fi_settings,screen,ship,bullets)
+
+def fire_bullet(fi_settings, screen, ship, bullets):
+    '''Dispara um projetil se o limite ainda nao foi alcançado'''
+    # Cria um novo projétil e o adiciona ao grupo de projeteis
+    if len(bullets) < fi_settings.bullets_allowed:
+        new_bullet = Bullet(fi_settings, screen, ship)
+        bullets.add(new_bullet)
 
 def check_keyup_events(event,ship):
     '''Responde ao soltar tecla'''
