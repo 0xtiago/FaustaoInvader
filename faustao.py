@@ -11,7 +11,8 @@ class Alien(Sprite):
         self.fi_settings = fi_settings
 
         #Carrega a imagem do Faustão e define seus atributos rect
-        self.image = pygame.image.load('images/faustao_alien.png')
+        self.image = pygame.image.load('images/faustao_alien2.png')
+        self.image = pygame.transform.scale(self.image, (43, 62))
         self.rect = self.image.get_rect()
 
         #Inicia cada novo alienigena proximo a parte superior esquerda da tela
@@ -23,4 +24,4 @@ class Alien(Sprite):
 
     def blitme(self):
         '''Desenha o Faustão em sua posição atual'''
-        self.screen.blit(self.image,self.rect)
+        self.screen.blit(self.image, self.rect)

@@ -1,6 +1,7 @@
 import sys
 import pygame
 from bullet import Bullet
+from faustao import Alien
 
 def check_keydown_events(event, fi_settings, screen, ship, bullets):
     '''Responde ao pressionar tecla'''
@@ -48,7 +49,7 @@ def check_events(fi_settings, screen, ship, bullets):
                 ship.moving_left = False
 
 
-def update_screen(fi_settings, screen, ship, bullets):
+def update_screen(fi_settings, screen, ship, aliens, bullets):
     '''Atualiza as imagens na tela e alterna para a nova tela'''
 
     # Redesenha a tela a cada passagem pelo laço
@@ -58,6 +59,8 @@ def update_screen(fi_settings, screen, ship, bullets):
         bullet.draw_bullet()
 
     ship.blitme()
+    #alien.blitme()
+    aliens.draw(screen)
 
     # Deixa a tela mais recente visível
     pygame.display.flip()
@@ -71,3 +74,20 @@ def update_bullets(bullets):
     for bullet in bullets.copy():
         if bullet.rect.bottom <= 0:
             bullets.remove(bullet)
+
+def create_fleet(fi_settings, screen, aliens):
+    '''Cria uma frota completa de alienigenas'''
+    # Cria um alienigena e calcula o numero de alienigenas em uma linha.
+    # O espaçamento entre os alienigenas é igual a largura de um alienigena
+    alien = Alien(fi_settings, screen)
+    alien_width = alien.rect.width
+    available_space_x = fi_settings.screen_width - 2 * alien_width
+    number_aliens_x = int(available_space_x / (2 * alien_width))
+
+    #Cria a primeira linha de alienigenas
+    for alien_number in range(number_aliens_x):
+        #Cria um Faustão e o posiciona na linha
+        alien = Alien(fi_settings, screen)
+        alien.x = alien_width + 2 * alien_width * alien_number
+        alien.rect.x = alien.x
+        aliens.add(alien)

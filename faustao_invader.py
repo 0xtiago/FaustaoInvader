@@ -21,14 +21,15 @@ def run_game():
     faustao_icon = pygame.image.load(fi_settings.icone_jogo)
     pygame.display.set_icon(faustao_icon)
 
-    #Cria a espaçonave
-    ship = Ship(fi_settings,screen)
-
-    #Cria um grupo onde serão armazenados os projeteis
+    #Cria a espaçonave, um grupo de projeteis e um grupo de alienigenas
+    ship = Ship(fi_settings, screen)
     bullets = Group()
+    aliens = Group()
 
-    #Cria um Faustão
-    alien = Alien(fi_settings,screen)
+    #Cria frota Faustão alienigena
+    gf.create_fleet(fi_settings, screen, aliens)
+    #Cria um alienigena
+    #alien = Alien(fi_settings,screen)
 
     #Inicia laço principal do jogo
     while True:
@@ -38,7 +39,6 @@ def run_game():
         ship.update()
         gf.update_bullets(bullets)
         #Atualiza as imagens na tela e alterna para a nova tela
-        gf.update_screen(fi_settings, screen, ship, alien, bullets)
-
+        gf.update_screen(fi_settings, screen, ship, aliens, bullets)
 
 run_game()
