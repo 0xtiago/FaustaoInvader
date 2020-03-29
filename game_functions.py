@@ -69,19 +69,24 @@ def update_bullets(fi_settings, screen, ship, aliens, bullets):
     '''Atualiza a posição dos projeteis e se livra dos projeteis antigos'''
     # Atualiza as posições dos projeteis
     bullets.update()
-    #Verifica se algum projetil atingiu um Faustao
-    #Em caso de afirmativo, livra-se do projetil e do alienigena
+
+    #Livra-se dos projéteis que desapareceram
+    for bullet in bullets.copy():
+        if bullet.rect.bottom <= 0:
+            bullets.remove(bullet)
+
+    check_bullet_alien_collisions(fi_settings, screen, ship, aliens, bullets)
+
+def check_bullet_alien_collisions(fi_settings, screen, ship, aliens, bullets):
+    '''Remove qualquer projetil e Faustao que tenham colidido'''
+    # Verifica se algum projetil atingiu um Faustao
+    # Em caso de afirmativo, livra-se do projetil e do alienigena
     collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
 
     if len(aliens) == 0:
         #Destroi os projeteis existentes e cria uma nova frota
         bullets.empty()
         create_fleet(fi_settings, screen, ship, aliens)
-
-    #Livra-se dos projéteis que desapareceram
-    for bullet in bullets.copy():
-        if bullet.rect.bottom <= 0:
-            bullets.remove(bullet)
 
 def get_number_aliens_x(fi_settings, alien_width):
     '''Determina o número de alienigenas que cabem em uma linha'''
