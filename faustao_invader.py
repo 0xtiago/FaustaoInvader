@@ -37,7 +37,7 @@ def run_game():
         #Responde aos eventos de pressionamento de teclas e de mouse
         gf.check_events(fi_settings, screen, ship, bullets)
         ship.update()
-        gf.update_bullets(bullets)
+        gf.update_bullets(fi_settings, screen, ship, aliens, bullets)
         gf.update_aliens(fi_settings, aliens)
         #Atualiza as imagens na tela e alterna para a nova tela
         gf.update_screen(fi_settings, screen, ship, aliens, bullets)
