@@ -29,6 +29,7 @@ class Settings():
         #CONFIGURAÇÕES DA ESPAÇONAVE
         ################################################################################
         self.ship_speed_factor = 1.5
+        self.ship_limit = 3
 
         #CONFIGURAÇÕES DOS TIROS
         self.bullet_speed_factor = 3

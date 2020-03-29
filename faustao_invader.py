@@ -1,6 +1,7 @@
 import sys
 import pygame
 from settings import Settings
+from game_stats import GameStats
 from ship import Ship
 from faustao import Alien
 import game_functions as gf
@@ -21,6 +22,9 @@ def run_game():
     faustao_icon = pygame.image.load(fi_settings.icone_jogo)
     pygame.display.set_icon(faustao_icon)
 
+    #Cria uma instancia para armazena dados estatisticos do jogo
+    stats = GameStats(fi_settings)
+
     #Cria a espaçonave, um grupo de projeteis e um grupo de alienigenas
     ship = Ship(fi_settings, screen)
     bullets = Group()
@@ -36,9 +40,10 @@ def run_game():
 
         #Responde aos eventos de pressionamento de teclas e de mouse
         gf.check_events(fi_settings, screen, ship, bullets)
-        ship.update()
-        gf.update_bullets(fi_settings, screen, ship, aliens, bullets)
-        gf.update_aliens(fi_settings, aliens)
+        if stats.game_active:
+            ship.update()
+            gf.update_bullets(fi_settings, screen, ship, aliens, bullets)
+            gf.update_aliens(fi_settings, stats, screen, ship, aliens, bullets)
         #Atualiza as imagens na tela e alterna para a nova tela
         gf.update_screen(fi_settings, screen, ship, aliens, bullets)
 
