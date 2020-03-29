@@ -75,19 +75,26 @@ def update_bullets(bullets):
         if bullet.rect.bottom <= 0:
             bullets.remove(bullet)
 
+def get_number_aliens_x(fi_settings, alien_width):
+    '''Determina o número de alienigenas que cabem em uma linha'''
+    available_space_x = fi_settings.screen_width - 2 * alien_width
+    number_aliens_x = int(available_space_x / (2 * alien_width))
+    return number_aliens_x
+
+def create_alien(fi_settings, screen, aliens, alien_number):
+    #Cria um alienigena e o posiciona na linha
+    alien = Alien(fi_settings, screen)
+    alien_width = alien.rect.width
+    alien.x = alien_width + 2 * alien_width * alien_number
+    alien.rect.x = alien.x
+    aliens.add(alien)
+
 def create_fleet(fi_settings, screen, aliens):
     '''Cria uma frota completa de alienigenas'''
     # Cria um alienigena e calcula o numero de alienigenas em uma linha.
-    # O espaçamento entre os alienigenas é igual a largura de um alienigena
     alien = Alien(fi_settings, screen)
-    alien_width = alien.rect.width
-    available_space_x = fi_settings.screen_width - 2 * alien_width
-    number_aliens_x = int(available_space_x / (2 * alien_width))
+    number_aliens_x = get_number_aliens_x(fi_settings, alien.rect.width)
 
     #Cria a primeira linha de alienigenas
     for alien_number in range(number_aliens_x):
-        #Cria um Faustão e o posiciona na linha
-        alien = Alien(fi_settings, screen)
-        alien.x = alien_width + 2 * alien_width * alien_number
-        alien.rect.x = alien.x
-        aliens.add(alien)
+        create_alien(fi_settings,screen,aliens, alien_number)
