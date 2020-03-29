@@ -27,7 +27,7 @@ def run_game():
     aliens = Group()
 
     #Cria frota Faustão alienigena
-    gf.create_fleet(fi_settings, screen, aliens)
+    gf.create_fleet(fi_settings, screen, ship, aliens)
     #Cria um alienigena
     #alien = Alien(fi_settings,screen)
 
