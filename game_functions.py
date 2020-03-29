@@ -106,4 +106,23 @@ def create_fleet(fi_settings, screen, ship, aliens):
     #Cria frota de alienigenas
     for row_number in range(number_rows):
         for alien_number in range(number_aliens_x):
-            create_alien(fi_settings,screen,aliens, alien_number, row_number)
+            create_alien(fi_settings, screen, aliens, alien_number, row_number)
+
+def check_fleet_edges(fi_settings, aliens):
+    '''Responde apropriadamente se algum Faustao atingiu uma borda.'''
+    for alien in aliens.sprites():
+        if alien.check_edges():
+            change_fleet_direction(fi_settings, aliens)
+            break
+
+def change_fleet_direction(fi_settings, aliens):
+    '''Faz toda a frota de Faustoes descer e mudar sua direção'''
+    for alien in aliens.sprites():
+        alien.rect.y += fi_settings.fleet_drop_speed
+    fi_settings.fleet_direction *= -1
+
+def update_aliens(fi_settings, aliens):
+    '''Verifica se a frota esta em uma das bordas e então atualiza as posições de todos os Faustões da
+    frota'''
+    check_fleet_edges(fi_settings,aliens)
+    aliens.update()
