@@ -1,6 +1,13 @@
 # FaustaoInvader
+![](https://www.clickgratis.com.br/_upload/artists/2013/04/06/fausto-silva-faustao.jpg)
 ----------------
 ## Description
+[PT]
+Este jogo é uma homenagem a um ícone da televisão brasileira, Fausto Silva, o Faustão.
+
+[EN]
+This game is a tribute to a Brazilian television icon, Fausto Silva, Faustão.
+
 -----------
 ## Installation
 ### Install prerequisites
@@ -18,6 +25,5 @@ git clone https://github.com/tiagotvrs/FaustaoInvader.git
 cd FaustaoInvader
 python3 faustaoinvader.py
 ```
-
-![a](https://imgur.com/bALufG1)
+![Faustão Invaders](https://i.imgur.com/bALufG1.png)
 
