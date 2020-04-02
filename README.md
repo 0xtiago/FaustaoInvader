@@ -10,14 +10,10 @@ This game is a tribute to a Brazilian television icon, Fausto Silva, Faustão.
 
 -----------
 ## Installation
-### Install prerequisites
+### Install prerequisites (Linux, but  you can use the same reference for Windows ;) )
 ```shell
-sudo python3 python3-pip git
+sudo apt install python3 python3-pip git
 pip3 install pygame
-```
-### Clone repository
-```shell
-git clone https://github.com/tiagotvrs/FaustaoInvader.git
 ```
 -----
 ## Run and shot Faustão!
