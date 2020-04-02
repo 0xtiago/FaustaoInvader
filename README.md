@@ -23,7 +23,7 @@ git clone https://github.com/tiagotvrs/FaustaoInvader.git
 ## Run and shot Faustão!
 ```shell
 cd FaustaoInvader
-python3 faustaoinvader.py
+python3 faustao_invader.py
 ```
 ![Faustão Invaders](https://i.imgur.com/bALufG1.png)
 
