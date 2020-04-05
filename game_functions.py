@@ -30,11 +30,16 @@ def check_keyup_events(event,ship):
         ship.moving_left = False
 
 
-def check_events(fi_settings, screen, ship, bullets):
+def check_events(fi_settings, screen, stats, play_button, ship, bullets):
     '''Responde aos eventos de pressionamento de teclas e de mouse'''
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
+
+        #Captura click do mouse no Play
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_x, mouse_y = pygame.mouse.get_pos()
+            check_play_button(stats, play_button, mouse_x, mouse_y)
 
         #Movimentando nave quando KEYDOWN, ou seja, pressionado.
         elif event.type == pygame.KEYDOWN:
@@ -48,6 +53,11 @@ def check_events(fi_settings, screen, ship, bullets):
                 ship.moving_right = False
             elif event.key == pygame.K_LEFT:
                 ship.moving_left = False
+
+def check_play_button(stats, play_button, mouse_x, mouse_y):
+    '''Inicia um novo jogo quando o jogador clicar em Play'''
+    if play_button.rect.collidepoint(mouse_x, mouse_y):
+        stats.game_active = True
 
 
 def update_screen(fi_settings, screen, stats, ship, aliens, bullets, play_button):
