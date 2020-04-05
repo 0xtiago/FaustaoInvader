@@ -1,6 +1,7 @@
 import pygame
 from settings import Settings
 from game_stats import GameStats
+from button import Button
 from ship import Ship
 import game_functions as gf
 from pygame.sprite import Group
@@ -15,6 +16,9 @@ def run_game():
 
     #Definindo titulo da janela
     pygame.display.set_caption(fi_settings.titulo_jogo)
+
+    #Cria o botão Play
+    play_button = Button(fi_settings, screen, "Play")
 
     #Definindo icone da janela
     faustao_icon = pygame.image.load(fi_settings.icone_jogo)
@@ -42,7 +46,8 @@ def run_game():
             ship.update()
             gf.update_bullets(fi_settings, screen, ship, aliens, bullets)
             gf.update_aliens(fi_settings, stats, screen, ship, aliens, bullets)
+
         #Atualiza as imagens na tela e alterna para a nova tela
-        gf.update_screen(fi_settings, screen, ship, aliens, bullets)
+        gf.update_screen(fi_settings, screen, stats, ship, aliens, bullets, play_button)
 
 run_game()

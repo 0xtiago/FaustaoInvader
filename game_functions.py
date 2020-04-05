@@ -1,5 +1,5 @@
 import sys
-from time import  sleep
+from time import sleep
 import pygame
 from bullet import Bullet
 from faustao import Alien
@@ -50,7 +50,7 @@ def check_events(fi_settings, screen, ship, bullets):
                 ship.moving_left = False
 
 
-def update_screen(fi_settings, screen, ship, aliens, bullets):
+def update_screen(fi_settings, screen, stats, ship, aliens, bullets, play_button):
     '''Atualiza as imagens na tela e alterna para a nova tela'''
 
     # Redesenha a tela a cada passagem pelo laço
@@ -63,8 +63,14 @@ def update_screen(fi_settings, screen, ship, aliens, bullets):
     #alien.blitme()
     aliens.draw(screen)
 
+    # Desenha o botão Play se o jogo estiver inativo
+    if not stats.game_active:
+        play_button.draw_button()
+
     # Deixa a tela mais recente visível
     pygame.display.flip()
+
+
 
 def update_bullets(fi_settings, screen, ship, aliens, bullets):
     '''Atualiza a posição dos projeteis e se livra dos projeteis antigos'''
