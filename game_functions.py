@@ -58,6 +58,8 @@ def check_play_button(fi_settings, screen, stats, play_button, ship, aliens, bul
     '''Inicia um novo jogo quando o jogador clicar em Play'''
     button_clicked = play_button.rect.collidepoint(mouse_x,mouse_y)
     if button_clicked and not stats.game_active:
+        #Oculta o cursos do mouse
+        pygame.mouse.set_visible(False)
         # Reinicia os dados estatisticos do jogo
         stats.reset_stats()
         stats.game_active = True
@@ -176,6 +178,8 @@ def ship_hit(fi_settings, stats, screen, ship, aliens, bullets):
     else:
         #Faz uma pausa
         sleep(0.5)
+        stats.game_active = False
+        pygame.mouse.set_visible(True)
 
 def check_aliens_bottom(fi_settings, stats, screen, ship, aliens, bullets):
     '''Verifica se algum Faustao alcançou a parte inferior da tela'''
