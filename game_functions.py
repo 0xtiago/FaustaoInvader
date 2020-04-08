@@ -123,6 +123,7 @@ def check_bullet_alien_collisions(fi_settings, screen, stats, sb, ship, aliens, 
         for aliens in collisions.values():
             stats.score += fi_settings.alien_points * len(aliens)
             sb.prep_score()
+        check_high_score(stats, sb)
 
     if len(aliens) == 0:
         #Destroi os projeteis existentes, aumenta a velocidade e cria uma nova frota
@@ -215,3 +216,9 @@ def update_aliens(fi_settings, stats, screen, ship, aliens, bullets):
 
     #Verifica se há algum alienigena que atingiu a parte inferior da tela
     check_aliens_bottom(fi_settings, stats, screen, ship, aliens, bullets)
+
+def check_high_score(stats, sb):
+    '''Verifica se a=ha uma nova pontuação omaxima'''
+    if stats.score > stats.high_score:
+        stats.high_score = stats.score
+        sb.prep_high_score()

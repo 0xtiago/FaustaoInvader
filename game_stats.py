@@ -7,6 +7,8 @@ class GameStats():
         self.reset_stats()
         #Inicia invasão faustonica em um estado ativo
         self.game_active = False
+        #A pontuação maxima jamais deverá ser reiniciada
+        self.high_score = 0
 
     def reset_stats(self):
         '''Inicializa os dados estatisticos que podem mudar durante o jogo'''
