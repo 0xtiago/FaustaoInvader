@@ -76,7 +76,7 @@ def check_play_button(fi_settings, screen, stats, play_button, ship, aliens, bul
     create_fleet(fi_settings, screen, ship, aliens)
     ship.center_ship()
 
-def update_screen(fi_settings, screen, stats, ship, aliens, bullets, play_button):
+def update_screen(fi_settings, screen, stats, sb, ship, aliens, bullets, play_button):
     '''Atualiza as imagens na tela e alterna para a nova tela'''
 
     # Redesenha a tela a cada passagem pelo laço
@@ -89,6 +89,9 @@ def update_screen(fi_settings, screen, stats, ship, aliens, bullets, play_button
     #alien.blitme()
     aliens.draw(screen)
 
+    #Desenha a informação sobre a pontuação
+    sb.show_score()
+
     # Desenha o botão Play se o jogo estiver inativo
     if not stats.game_active:
         play_button.draw_button()
@@ -98,7 +101,7 @@ def update_screen(fi_settings, screen, stats, ship, aliens, bullets, play_button
 
 
 
-def update_bullets(fi_settings, screen, ship, aliens, bullets):
+def update_bullets(fi_settings, screen, stats, sb,   ship, aliens, bullets):
     '''Atualiza a posição dos projeteis e se livra dos projeteis antigos'''
     # Atualiza as posições dos projeteis
     bullets.update()
@@ -108,13 +111,18 @@ def update_bullets(fi_settings, screen, ship, aliens, bullets):
         if bullet.rect.bottom <= 0:
             bullets.remove(bullet)
 
-    check_bullet_alien_collisions(fi_settings, screen, ship, aliens, bullets)
+    check_bullet_alien_collisions(fi_settings, screen, stats, sb,  ship, aliens, bullets)
 
-def check_bullet_alien_collisions(fi_settings, screen, ship, aliens, bullets):
+def check_bullet_alien_collisions(fi_settings, screen, stats, sb, ship, aliens, bullets):
     '''Remove qualquer projetil e Faustao que tenham colidido'''
     # Verifica se algum projetil atingiu um Faustao
     # Em caso de afirmativo, livra-se do projetil e do alienigena
     collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
+
+    if collisions:
+        for aliens in collisions.values():
+            stats.score += fi_settings.alien_points * len(aliens)
+            sb.prep_score()
 
     if len(aliens) == 0:
         #Destroi os projeteis existentes, aumenta a velocidade e cria uma nova frota
