@@ -72,6 +72,7 @@ def check_play_button(fi_settings, screen, stats, sb, play_button, ship, aliens,
         sb.prep_score()
         sb.prep_high_score()
         sb.prep_level()
+        sb.prep_ships()
 
     # Esvazia a lista de Faustoes e projeteis
     aliens.empty()
@@ -188,11 +189,41 @@ def change_fleet_direction(fi_settings, aliens):
     fi_settings.fleet_direction *= -1
 
 
-def ship_hit(fi_settings, stats, screen, ship, aliens, bullets):
+
+
+def check_aliens_bottom(fi_settings, screen, stats, sb, ship, aliens, bullets):
+    '''Verifica se algum Faustao alcançou a parte inferior da tela'''
+    screen_rect = screen.get_rect()
+    for alien in aliens.sprites():
+        if alien.rect.bottom >= screen_rect.bottom:
+            #Trata esse caso do mesmo modo que é feito quando a espaçonave é atingida
+            ship_hit(fi_settings, screen, stats, sb, ship, aliens, bullets)
+            break
+
+def update_aliens(fi_settings, screen, stats, sb, ship, aliens, bullets):
+    '''Verifica se a frota esta em uma das bordas e então atualiza as posições de todos os Faustões da
+    frota'''
+    check_fleet_edges(fi_settings,aliens)
+    aliens.update()
+
+    #Verifica se houveram colisões entre Faustao e a espaçonave
+    if pygame.sprite.spritecollideany(ship,aliens):
+        ship_hit(fi_settings, screen, stats, sb, ship, aliens, bullets)
+        #print("Oh loco meu!!!")
+
+    #Verifica se há algum alienigena que atingiu a parte inferior da tela
+    check_aliens_bottom(fi_settings, screen, stats, sb, ship, aliens, bullets)
+
+
+def ship_hit(fi_settings, screen, stats, sb, ship, aliens, bullets):
     '''Responde ao fato de a espaçonave ter sido atingida por um Faustao alienigena'''
     if stats.ships_left > 0:
         #Decrementa ships_left
         stats.ships_left -= 1
+
+        #Atualiza o painel de pontuações
+        sb.prep_ships()
+
         #Esvazia a lista de Faustoes e de projeteis
         aliens.empty()
         bullets.empty()
@@ -204,29 +235,6 @@ def ship_hit(fi_settings, stats, screen, ship, aliens, bullets):
         sleep(0.5)
         stats.game_active = False
         pygame.mouse.set_visible(True)
-
-def check_aliens_bottom(fi_settings, stats, screen, ship, aliens, bullets):
-    '''Verifica se algum Faustao alcançou a parte inferior da tela'''
-    screen_rect = screen.get_rect()
-    for alien in aliens.sprites():
-        if alien.rect.bottom >= screen_rect.bottom:
-            #Trata esse caso do mesmo modo que é feito quando a espaçonave é atingida
-            ship_hit(fi_settings, stats, screen, ship, aliens, bullets)
-            break
-
-def update_aliens(fi_settings, stats, screen, ship, aliens, bullets):
-    '''Verifica se a frota esta em uma das bordas e então atualiza as posições de todos os Faustões da
-    frota'''
-    check_fleet_edges(fi_settings,aliens)
-    aliens.update()
-
-    #Verifica se houveram colisões entre Faustao e a espaçonave
-    if pygame.sprite.spritecollideany(ship,aliens):
-        ship_hit(fi_settings, stats, screen, ship, aliens, bullets)
-        #print("Oh loco meu!!!")
-
-    #Verifica se há algum alienigena que atingiu a parte inferior da tela
-    check_aliens_bottom(fi_settings, stats, screen, ship, aliens, bullets)
 
 def check_high_score(stats, sb):
     '''Verifica se a=ha uma nova pontuação omaxima'''

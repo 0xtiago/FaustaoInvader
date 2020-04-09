@@ -47,7 +47,7 @@ def run_game():
         if stats.game_active:
             ship.update()
             gf.update_bullets(fi_settings, screen, stats, sb, ship, aliens, bullets)
-            gf.update_aliens(fi_settings, stats, screen, ship, aliens, bullets)
+            gf.update_aliens(fi_settings, screen, stats, sb, ship, aliens, bullets)
 
         #Atualiza as imagens na tela e alterna para a nova tela
         gf.update_screen(fi_settings, screen, stats,sb, ship, aliens, bullets, play_button)
