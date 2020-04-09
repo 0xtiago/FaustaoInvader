@@ -30,7 +30,7 @@ def check_keyup_events(event,ship):
         ship.moving_left = False
 
 
-def check_events(fi_settings, screen, stats, play_button, ship, aliens, bullets):
+def check_events(fi_settings, screen, stats, sb, play_button, ship, aliens, bullets):
     '''Responde aos eventos de pressionamento de teclas e de mouse'''
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -39,7 +39,7 @@ def check_events(fi_settings, screen, stats, play_button, ship, aliens, bullets)
         #Captura click do mouse no Play
         elif event.type == pygame.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = pygame.mouse.get_pos()
-            check_play_button(fi_settings, screen, stats, play_button, ship, aliens, bullets, mouse_x, mouse_y)
+            check_play_button(fi_settings, screen, stats, sb, play_button, ship, aliens, bullets, mouse_x, mouse_y)
 
         #Movimentando nave quando KEYDOWN, ou seja, pressionado.
         elif event.type == pygame.KEYDOWN:
@@ -54,7 +54,7 @@ def check_events(fi_settings, screen, stats, play_button, ship, aliens, bullets)
             elif event.key == pygame.K_LEFT:
                 ship.moving_left = False
 
-def check_play_button(fi_settings, screen, stats, play_button, ship, aliens, bullets, mouse_x, mouse_y):
+def check_play_button(fi_settings, screen, stats, sb, play_button, ship, aliens, bullets, mouse_x, mouse_y):
     '''Inicia um novo jogo quando o jogador clicar em Play'''
     button_clicked = play_button.rect.collidepoint(mouse_x,mouse_y)
     if button_clicked and not stats.game_active:
@@ -67,6 +67,11 @@ def check_play_button(fi_settings, screen, stats, play_button, ship, aliens, bul
         # Reinicia os dados estatisticos do jogo
         stats.reset_stats()
         stats.game_active = True
+
+        #Reinicia as imagens do painel de pontuação
+        sb.prep_score()
+        sb.prep_high_score()
+        sb.prep_level()
 
     # Esvazia a lista de Faustoes e projeteis
     aliens.empty()
@@ -126,8 +131,14 @@ def check_bullet_alien_collisions(fi_settings, screen, stats, sb, ship, aliens, 
         check_high_score(stats, sb)
 
     if len(aliens) == 0:
-        #Destroi os projeteis existentes, aumenta a velocidade e cria uma nova frota
+        #Se a frota toda for destruida, inicia um novo nível
         bullets.empty()
+        fi_settings.increase_speed()
+
+        #Aumenta o nível
+        stats.level += 1
+        sb.prep_level()
+
         create_fleet(fi_settings, screen, ship, aliens)
 
 def get_number_aliens_x(fi_settings, alien_width):

@@ -43,7 +43,7 @@ def run_game():
     while True:
 
         #Responde aos eventos de pressionamento de teclas e de mouse
-        gf.check_events(fi_settings, screen, stats, play_button, ship, aliens, bullets)
+        gf.check_events(fi_settings, screen, stats, sb, play_button, ship, aliens, bullets)
         if stats.game_active:
             ship.update()
             gf.update_bullets(fi_settings, screen, stats, sb, ship, aliens, bullets)
