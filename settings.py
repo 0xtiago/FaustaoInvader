@@ -7,7 +7,7 @@ class Settings():
         #CONFIGURAÇÕES DA JANELA
         ################################################################################
         ##Configuração do título do jogo
-        self.titulo_jogo = "Faustão Invader - v0.1"
+        self.titulo_jogo = "Faustão Invader - v1.0"
 
         ##Configuração do ícone da janela
         self.icone_jogo = "images/faustao_icon.png"
