@@ -12,6 +12,10 @@ def run_game():
     pygame.init()
     fi_settings = Settings()
 
+    #Lendo a musica de fundo
+    musica_de_fundo = pygame.mixer.music.load('rap_do_ovo.ogg')
+    pygame.mixer.music.play(-1)
+
     #Obtendo confs da tela
     screen = pygame.display.set_mode((fi_settings.screen_width,fi_settings.screen_height))
 
